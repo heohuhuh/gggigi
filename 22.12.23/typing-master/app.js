@@ -88,37 +88,43 @@ const countDown = ()=>{
         isReady = false;
         clearInterval(timeInterval)
         wordDispaly.innerText = '패배'
-        button.innerText = '새로운 게임 하기'
+        button.innerText = '새로운 게임하기'
         button.classList.remove('stop')
     }
     timeDisplay.innerText = time
 }
 const run = ()=>{   
-    if(button.innerText === '게임 시작하기'){
-        wordDispaly.classList.add('ready');
-        wordDispaly.innerText = 'Enter를 누르면 시작'
-        if(isReady === false){
-            return;
-        }
-        wordInput.value = ""
-        isPlaying = true;
-    }else if(button.innerText === '일시정지'){        
-        clearInterval(timeInterval)
-        button.classList.remove('stop')
-        button.innerText = '다시 시작'
-        isPlaying = false;
-    }else if(button.innerText === '다시 시작'){
-        button.classList.add('stop')
-        button.innerText = '일시정지'
-        isPlaying = true;
-        timeInterval = setInterval(countDown,1000)
-    }else if(button.innerText === '새로운 게임하기'){
-        timeDisplay.innerText = "-";
-        scoreDisplay.innerText = "-";
-        button.innerText = '게임을 불러오는 중...'
-        button.classList.add('loading')
-        isStarting = false;
-        getWrods();
+    switch(button.innerText){
+        case '게임 시작하기': 
+            wordDispaly.classList.add('ready');
+            wordDispaly.innerText = 'Enter를 누르면 시작'
+            if(isReady === false){
+                return;
+            }
+            wordInput.value = ""
+            isPlaying = true;
+            break;
+        case '일시정지':         
+            button.classList.remove('stop')
+            button.innerText = '다시 시작'
+            isPlaying = false;
+            clearInterval(timeInterval)
+            break;
+        case '다시 시작':
+            button.classList.add('stop')
+            button.innerText = '일시정지'
+            isPlaying = true;
+            timeInterval = setInterval(countDown,1000)
+            break;
+        case '새로운 게임하기':
+            timeDisplay.innerText = "-";
+            scoreDisplay.innerText = "-";
+            button.innerText = '게임을 불러오는 중...'
+            button.classList.add('loading')
+            isStarting = false;
+            getWrods();
+            break;
+                
     }
 }
 
