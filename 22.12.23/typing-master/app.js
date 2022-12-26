@@ -122,7 +122,7 @@ const run = ()=>{
             button.innerText = '게임을 불러오는 중...'
             button.classList.add('loading')
             isStarting = false;
-            getWrods();
+            getWrods(); 
             break;
                 
     }

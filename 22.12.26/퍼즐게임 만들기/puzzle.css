@@ -1,0 +1,117 @@
+* {
+    margin : 0;
+    padding : 0;
+}
+:root{
+    --facebook :#3b5998;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.play-time{
+    font-size: 3rem;
+    margin-top: 2rem;
+    color: var(--facebook);
+}
+ul{
+    list-style: none;
+    margin-top: 1rem;
+    border: 2px solid var(--facebook);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* repeat(4, 1fr)*/
+}
+li{
+    width: 100px;
+    height: 100px;
+    background: #efefef;
+    color: #fff;
+    background: url("https://placeimg.com/400/400/1");
+}
+.start-button {
+    cursor: pointer;
+    background: var(--facebook);
+    color: #fff;
+    border:none;
+    padding : 1rem 2rem;
+    margin-top: 1rem;
+}
+.list00{
+    background-position-x: 0px;
+    background-position-y: 0px;
+}
+.list01{
+    background-position-x: -100px;
+    background-position-y: 0px;
+}
+.list02{
+    background-position-x: -200px;
+    background-position-y: 0px;
+}
+.list03{
+    background-position-x: -300px;
+    background-position-y: 0px;
+}
+.list04{
+    background-position-x: 0px;
+    background-position-y: -100px;
+}
+.list05{
+    background-position-x: -100px;
+    background-position-y: -100px;
+}
+.list06{
+    background-position-x: -200px;
+    background-position-y: -100px;
+}
+.list07{
+    background-position-x: -300px;
+    background-position-y: -100px;
+}
+.list08{
+    background-position-x: 0px;
+    background-position-y: -200px;
+}
+.list09{
+    background-position-x: -100px;
+    background-position-y: -200px;
+}
+.list10{
+    background-position-x: -200px;
+    background-position-y: -200px;
+}
+.list11{
+    background-position-x: -300px;
+    background-position-y: -200px;
+}
+.list12{
+    background-position-x: 0px;
+    background-position-y: -300px;
+}
+.list13{
+    background-position-x: -100px;
+    background-position-y: -300px;
+}
+.list14{
+    background-position-x: -200px;
+    background-position-y: -300px;
+}
+.list15{
+    background-position-x: -300px;
+    background-position-y: -300px;
+}
+
+.game-text{
+    position: absolute;
+    font-size: 45px;
+    color: red;
+    display: none;
+}
+.bofore-start{
+    position: absolute;
+    background-color: red;
+    background-size: 400px;
+    font-size: 400px;
+}
