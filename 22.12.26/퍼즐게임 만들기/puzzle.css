@@ -19,7 +19,7 @@
 ul{
     list-style: none;
     margin-top: 1rem;
-    border: 2px solid var(--facebook);
+    border: 4px solid var(--facebook);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr; /* repeat(4, 1fr)*/
 }
@@ -34,9 +34,19 @@ li{
     cursor: pointer;
     background: var(--facebook);
     color: #fff;
+    font-size: 20px;
     border:none;
+    border-radius: 5px;
     padding : 1rem 2rem;
     margin-top: 1rem;
+}
+.hint-button{
+    cursor: pointer;
+    background-color: #fff;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+
 }
 .list00{
     background-position-x: 0px;
@@ -105,13 +115,13 @@ li{
 
 .game-text{
     position: absolute;
-    font-size: 45px;
-    color: red;
-    display: none;
+    font-size: 60px;
+    color: blue;
+    display: none;;
 }
-.bofore-start{
+.lose-text{
     position: absolute;
-    background-color: red;
-    background-size: 400px;
-    font-size: 400px;
+    display: none;
+    font-size: 80px;
+    color: red;
 }
