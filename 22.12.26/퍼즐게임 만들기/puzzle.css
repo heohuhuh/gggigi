@@ -20,14 +20,18 @@ ul{
     list-style: none;
     margin-top: 1rem;
     border: 4px solid var(--facebook);
+    border-radius: 3px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr; /* repeat(4, 1fr)*/
 }
 li{
     width: 100px;
     height: 100px;
-    background: #efefef;
+    background: #fff;
     color: #fff;
+}
+.open{
+
     background: url("https://placeimg.com/400/400/1");
 }
 .start-button {
@@ -47,6 +51,16 @@ li{
     padding: 1rem;
     font-size: 1rem;
 
+}
+.clear-button{
+    cursor: pointer;
+    background-color: #fff;
+    color: red;
+    text-decoration: line-through;
+    border: none;
+    border-radius: 3px;
+    padding: 2px;
+    font-weight: bold;
 }
 .list00{
     background-position-x: 0px;
@@ -113,7 +127,13 @@ li{
     background-position-y: -300px;
 }
 
-.game-text{
+.start-text{
+    position: absolute;
+    border-color: black;
+    font-size: 60px;
+    color: blue;
+    display: none;;
+}.game-text{
     position: absolute;
     font-size: 60px;
     color: blue;

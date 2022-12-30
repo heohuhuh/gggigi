@@ -1,5 +1,6 @@
 const container = document.querySelector('.image-container')
 const startButton = document.querySelector('.start-button')
+const startText = document.querySelector('.start-text')
 const gameText = document.querySelector('.game-text')
 const loseText = document.querySelector('.lose-text')
 const playTime = document.querySelector('.play-time')
@@ -18,60 +19,39 @@ const draged = {
     index : null
 }
 
-clearButton.addEventListener("click",()=>{
-    console.log(container.children)
-    const checkBox = [...container.children]
-    console.log(checkBox)
-    console.log()
-        let unMatched =null;
-        checkBox.forEach(child=>{
-            draged.el = child;
-            draged.class = child.className
-            draged.index = checkBox.indexOf(child)
-                for(let i=0; i<checkBox.length; i++){
-                    
-                    if(child.dataset.type == i){
-                        console.log('hello')
-                        checkBox[i].after(child);
-                        checkBox[draged.index].after(checkBox[i]);
-                    }
-                    
-                }
-                child.innerText = child.getAttribute("data-type")
-        })
-        unMatched = checkBox.filter((list,index)=>{
-            return list.getAttribute("data-type") != index
-        })
-        if(unMatched.length === 0){
-            isPlaying = false;
-            clearInterval(timeInterval)
-            gameText.style.display = "block"
-        }
-        console.log(unMatched.length)
-})
-hintButton.addEventListener("click",()=>{
-
-    hintCheck == true ? hintCheck = false : hintCheck = true;
-    if(hintCheck == true){
-        [...container.children].forEach(child=>{
-            child.innerText = child.getAttribute("data-type")
-        })
-    }else{
-        [...container.children].forEach(child=>{
-            child.innerText = ""
-        })
+//함수
+function clear(){
+    if(isPlaying == true){
+        isPlaying = false;
+        clearInterval(timeInterval)
+        gameText.style.display = "block"
     }
-})
+}
 
-startButton.addEventListener("click",()=>{
-    setGame();
-})
+function reload(){
+    let sub = [...container.children];
+    sub.forEach(child =>{
+        for(let i = 0; i<sub.length; i++){
+            if( i === Number(child.dataset.type)){
+                container.children[i].before(child);
+            }
+        }
+    })
+    let unMatched = sub.filter((list,index) =>{
+        return index != Number(list.dataset.type)
+    })
+    if(unMatched != 0){
+        reload();
+    }
+}
+
 function setGame(){
     isPlaying = true;
-    time = 5;
+    tiles.forEach(tile =>{
+        tile.draggable = true
+    })
+    time = 30;
     playTime.innerText = time
-    loseText.style.display = "none"
-    gameText.style.display = "none"
     timeInterval = setInterval(()=>{
         if(time==0){
             clearInterval(timeInterval)
@@ -88,9 +68,14 @@ function setGame(){
         container.appendChild(tile)
     })
 }
+
 function loseGame(){
     loseText.style.display = "block"
+    tiles.forEach(tile =>{
+        tile.draggable = false
+    })
 }
+
 function shuffle(array){
     let index = array.length -1;
     while(index >0){
@@ -111,17 +96,18 @@ function checkStatus(){
         clearInterval(timeInterval)
         gameText.style.display = "block"
         isPlaying = false;
+        tiles.forEach(tile =>{
+            tile.draggable = false
+        })
     }
-    tiles.forEach(tile =>{
-        tile.draggable = false
-    })
     /* currentList.forEach((list,index)=>{
         console.log(list,index)
     }) */
-    console.log(unMatched)
 }
+
+//이벤트
 container.addEventListener('dragstart',e =>{
-    if(isPlaying ==true){
+    if(isPlaying == true){
         const obj = e.target;
         draged.el = obj;
         draged.class = obj.className;
@@ -130,14 +116,13 @@ container.addEventListener('dragstart',e =>{
     }
 })
 container.addEventListener('dragover', e =>{
-    if(isPlaying ==true){
+    if(isPlaying == true){
         e.preventDefault()
         //console.log(e)
     }
 })
 container.addEventListener('drop', e =>{
-    if(isPlaying ==true){
-        console.log(draged.el.nextSibling)
+    if(isPlaying == true){
         const obj = e.target;
         let originPlace;
         let isLast = false;
@@ -151,5 +136,55 @@ container.addEventListener('drop', e =>{
         draged.index > droppedIndex ? obj.before(draged.el) : obj.after(draged.el) //?가 의미가 있나?
         isLast ? originPlace.after(obj) : originPlace.before(obj)
         checkStatus()
+    }
+})
+
+clearButton.addEventListener("click",()=>{
+    if(isPlaying == true){
+        reload();
+        clear();
+    }
+})
+hintButton.addEventListener("click",()=>{
+    if(isPlaying == true){
+        hintCheck == true ? hintCheck = false : hintCheck = true;
+        if(hintCheck == true){
+            [...container.children].forEach(child=>{
+                child.innerText = child.getAttribute("data-type")
+            })
+        }else{
+            [...container.children].forEach(child=>{
+                child.innerText = ""
+            })
+        }
+    }
+})
+
+startButton.addEventListener("click",()=>{
+    if(isPlaying == false){
+        reload()
+        clearInterval(timeInterval)
+        startText.style.display = "none"
+        gameText.style.display = "none"
+        loseText.style.display = "none"
+        tiles.forEach(tile =>{
+            tile.classList.add("open")
+            tile.draggable = false
+        })
+        time = 3;
+        playTime.innerText = time;
+        timeInterval = setInterval(()=>{
+            if(time==0){
+                startText.style.display = "none"
+                clearInterval(timeInterval)
+                setGame();
+            }else{
+                time--;
+                playTime.innerText = time
+                if(time === 0){                
+                    startText.style.display = "block"
+                }
+            }
+        },1000)
     }
 })
